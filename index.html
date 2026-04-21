@@ -265,38 +265,34 @@ function Nav() {
 
 /* ── HERO ── */
 function Hero() {
-  const [word, setWord] = useState(0);
-  const words = ['Automated.', 'Legally Binding.', 'Self-Settling.'];
-  useEffect(() => { const t = setInterval(() => setWord(w => (w+1)%3), 3200); return () => clearInterval(t); }, []);
-
   return (
     <section style={{ minHeight:'100vh', display:'flex', flexDirection:'column', justifyContent:'center', paddingTop:64, position:'relative', overflow:'hidden' }}>
-      {/* Subtle grid */}
-      <div style={{ position:'absolute', inset:0, backgroundImage:'linear-gradient(rgba(37,99,235,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.03) 1px, transparent 1px)', backgroundSize:'80px 80px', pointerEvents:'none' }}/>
-      {/* Radial glow */}
-      <div style={{ position:'absolute', top:'20%', left:'50%', transform:'translateX(-50%)', width:700, height:500, background:'radial-gradient(ellipse, rgba(37,99,235,0.07) 0%, transparent 70%)', pointerEvents:'none' }}/>
-
-      <Ticker/>
-
       <div className="container" style={{ paddingTop:80, paddingBottom:60, position:'relative' }}>
-        <div className="fade d1" style={{ marginBottom:24, display:'flex', gap:10, flexWrap:'wrap' }}>
-          <span className="tag tag-blue">Legal Wrapper</span>
-          <span className="tag tag-green">Chainlink Oracle</span>
-          <span className="tag tag-gold">ISDA-Compatible</span>
+
+        {/* Eyebrow */}
+        <div className="fade d1" style={{ marginBottom:32, display:'flex', alignItems:'center', gap:16 }}>
+          <div style={{ width:32, height:1, background:'rgba(255,255,255,0.2)' }}/>
+          <span style={{ fontFamily:'IBM Plex Mono', fontSize:10, color:'var(--muted)', letterSpacing:'.18em', textTransform:'uppercase' }}>Institutional OTC Infrastructure</span>
         </div>
 
-        <h1 className="fade d2" style={{ fontSize:'clamp(36px, 5.5vw, 72px)', maxWidth:760, marginBottom:28, color:'#f0f4ff' }}>
-          OTC Swaps —<br/>
-          <span style={{ background:'linear-gradient(90deg, #4f8ef7, #34d399)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
-            {words[word]}
-          </span>
+        <h1 className="fade d2" style={{ fontSize:'clamp(36px, 5vw, 68px)', maxWidth:820, marginBottom:10, color:'#eef2ff', fontFamily:'DM Serif Display', fontWeight:400, lineHeight:1.08, letterSpacing:'-.02em' }}>
+          The Legal Agreement
+        </h1>
+        <h1 className="fade d2" style={{ fontSize:'clamp(36px, 5vw, 68px)', maxWidth:820, marginBottom:10, color:'#eef2ff', fontFamily:'DM Serif Display', fontWeight:400, lineHeight:1.08, letterSpacing:'-.02em' }}>
+          and Its Execution
+        </h1>
+        <h1 className="fade d2" style={{ fontSize:'clamp(36px, 5vw, 68px)', maxWidth:820, marginBottom:36, fontFamily:'DM Serif Display', fontWeight:400, lineHeight:1.08, letterSpacing:'-.02em' }}>
+          <span style={{ color:'rgba(255,255,255,0.35)', fontStyle:'italic' }}>are now one object.</span>
         </h1>
 
-        <p className="fade d3" style={{ fontSize:17, color:'var(--text2)', maxWidth:580, lineHeight:1.8, marginBottom:44 }}>
-          Smart-Swap encapsulates the full legal agreement inside a self-executing on-chain <strong style={{ color:'var(--text)', fontWeight:500 }}>Legal Wrapper</strong> — every clause, signature, and cash flow in a single verifiable object. Two collateral pools, one Chainlink oracle, zero back-office overhead.
+        {/* Thin rule */}
+        <div className="fade d3" style={{ width:64, height:1, background:'rgba(79,142,247,0.5)', marginBottom:32 }}/>
+
+        <p className="fade d3" style={{ fontSize:16, color:'var(--text2)', maxWidth:560, lineHeight:1.85, marginBottom:44 }}>
+          Smart-Swap encodes every clause, signature, and cash flow into a single self-executing <strong style={{ color:'var(--text)', fontWeight:500 }}>Legal Wrapper</strong> — eliminating the gap between what is agreed and what is settled. Two collateral pools, one Chainlink oracle, zero back-office overhead.
         </p>
 
-        <div className="fade d4" style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+        <div className="fade d4" style={{ display:'flex', gap:12, flexWrap:'wrap', marginBottom:72 }}>
           <button className="btn btn-primary" onClick={() => document.getElementById('diagram').scrollIntoView({ behavior:'smooth' })}>
             View Architecture
           </button>
@@ -305,20 +301,21 @@ function Hero() {
           </button>
         </div>
 
-        {/* KPIs */}
-        <div className="fade d5 kpi-grid" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))', gap:1, marginTop:64, maxWidth:680, background:'var(--border)', borderRadius:4, overflow:'hidden' }}>
+        {/* KPIs — clean horizontal strip */}
+        <div className="fade d5" style={{ borderTop:'1px solid var(--border)', paddingTop:32, display:'grid', gridTemplateColumns:'repeat(4, 1fr)', maxWidth:680, gap:0 }}>
           {[
-            { val:'T+0',  sub:'Settlement latency', color:'var(--blue3)' },
-            { val:'100%', sub:'Legal certainty',     color:'var(--green2)' },
-            { val:'< 0',  sub:'Reconciliation errors', color:'var(--gold2)' },
-            { val:'DeFi', sub:'Optimised collateral yield', color:'var(--green2)' },
-          ].map(s => (
-            <div key={s.sub} style={{ background:'var(--bg2)', padding:'22px 24px' }}>
-              <div style={{ fontFamily:'DM Serif Display', fontSize:30, color:s.color, marginBottom:4 }}>{s.val}</div>
-              <div style={{ fontFamily:'IBM Plex Mono', fontSize:10, color:'var(--muted)', textTransform:'uppercase', letterSpacing:'.08em' }}>{s.sub}</div>
+            { val:'T+0',    sub:'Settlement' },
+            { val:'100%',   sub:'Legal certainty' },
+            { val:'Zero',   sub:'Reconciliation errors' },
+            { val:'DeFi',   sub:'Collateral yield' },
+          ].map((s, i) => (
+            <div key={s.sub} style={{ paddingRight:32, borderRight: i < 3 ? '1px solid var(--border)' : 'none', paddingLeft: i > 0 ? 32 : 0 }}>
+              <div style={{ fontFamily:'DM Serif Display', fontSize:28, color:'var(--text)', marginBottom:5 }}>{s.val}</div>
+              <div style={{ fontFamily:'IBM Plex Mono', fontSize:9, color:'var(--muted)', textTransform:'uppercase', letterSpacing:'.1em' }}>{s.sub}</div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -1025,51 +1022,85 @@ function Config() {
 /* ── BENEFITS ── */
 function Benefits() {
   const items = [
-    { icon:'trending', title:'Back-Office Eliminated',   stat:'T+0',  sub:'atomic settlement',  desc:'The Legal Wrapper is its own clearing house. Trade confirmation, reconciliation, and cash transfer occur in a single on-chain transaction — eliminating the operational chain that creates T+1 delays today.', color:'var(--blue2)' },
-    { icon:'doc',      title:'Legal Certainty',          stat:'100%', sub:'code = contract',    desc:'The Legal Wrapper encodes legal terms directly in executable code. There is no gap between what is agreed and what is paid — the contract enforces itself, automatically.', color:'var(--green2)' },
-    { icon:'trending', title:'Capital Optimisation',     stat:'DeFi', sub:'yield on collateral', desc:'Collateral is deployed into audited DeFi yield protocols (Aave, Compound), generating returns structurally above constrained traditional instruments. The spread over standard eligible collateral reduces carry cost for both parties.', color:'var(--gold2)' },
-    { icon:'shield',   title:'Regulatory Compliance',    stat:'KYC',  sub:'on-chain',           desc:'Wallet-to-entity binding with digital KYC attestation satisfies AML obligations cryptographically. Every action is permanently auditable and immutable on-chain.', color:'rgba(167,139,250,0.9)' },
-    { icon:'lock',     title:'Immutable Event History',  stat:'∞',    sub:'audit trail',        desc:'Every settlement, dividend payment, price override, and parameter change is permanently recorded on-chain with a timestamp and cryptographic proof. A complete, tamper-proof audit trail available to regulators at any time.', color:'rgba(148,210,189,0.9)' },
+    { n:'01', title:'Back-Office Eliminated',  stat:'T+0',  sub:'Settlement latency',   desc:'The Legal Wrapper is its own clearing house. Trade confirmation, reconciliation, and cash transfer occur in a single on-chain transaction — eliminating the operational chain that creates T+1 delays today.' },
+    { n:'02', title:'Legal Certainty',         stat:'100%', sub:'Code = Contract',      desc:'The Legal Wrapper encodes legal terms directly in executable code. There is no gap between what is agreed and what is paid — the contract enforces itself, automatically.' },
+    { n:'03', title:'Capital Optimisation',    stat:'DeFi', sub:'Collateral Yield',     desc:'Collateral is deployed into audited DeFi yield protocols generating returns structurally above constrained traditional instruments. The spread over standard eligible collateral reduces carry cost for both parties.' },
+    { n:'04', title:'Regulatory Compliance',   stat:'KYC',  sub:'On-Chain Attestation', desc:'Wallet-to-entity binding with digital KYC attestation satisfies AML obligations cryptographically. Every action is permanently auditable and immutable on-chain.' },
+    { n:'05', title:'Immutable Event History', stat:'∞',    sub:'Audit Trail',          desc:'Every settlement, dividend payment, price override, and parameter change is permanently recorded on-chain with a timestamp and cryptographic proof — available to regulators at any time.' },
   ];
 
   return (
     <section id="benefits">
       <div className="container">
-        <div style={{ maxWidth:540, marginBottom:56 }}>
-          <span className="tag tag-green" style={{ marginBottom:20, display:'inline-block' }}>For Tier-1 Banks</span>
-          <h2 style={{ fontSize:'clamp(26px,3.5vw,44px)', marginBottom:16 }}>A Structural Advantage</h2>
-          <p style={{ color:'var(--text2)', lineHeight:1.8 }}>Smart-Swap delivers measurable improvements across cost, legal certainty, and capital efficiency — providing a durable competitive edge in institutional derivatives.</p>
+
+        {/* Section header */}
+        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap:40, marginBottom:0, paddingBottom:40, borderBottom:'1px solid var(--border)', flexWrap:'wrap' }}>
+          <div style={{ maxWidth:540 }}>
+            <span className="tag tag-green" style={{ marginBottom:20, display:'inline-block' }}>For Tier-1 Banks</span>
+            <h2 style={{ fontSize:'clamp(26px,3.5vw,44px)', marginBottom:16 }}>A Structural Advantage</h2>
+            <p style={{ color:'var(--text2)', lineHeight:1.8 }}>Smart-Swap delivers measurable improvements across cost, legal certainty, and capital efficiency — providing a durable competitive edge in institutional derivatives.</p>
+          </div>
+          {/* Summary metrics strip */}
+          <div style={{ display:'flex', gap:32, flexWrap:'wrap', paddingBottom:4 }}>
+            {items.map((b, i) => (
+              <div key={i} style={{ textAlign:'center' }}>
+                <div style={{ fontFamily:'DM Serif Display', fontSize:22, color:'var(--text)', lineHeight:1 }}>{b.stat}</div>
+                <div style={{ fontFamily:'IBM Plex Mono', fontSize:9, color:'var(--muted)', textTransform:'uppercase', letterSpacing:'.1em', marginTop:5 }}>{b.sub}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px,1fr))', gap:1, background:'var(--border)', borderRadius:4, overflow:'hidden', marginBottom:20 }}>
+        {/* Benefits — document rows */}
+        <div style={{ marginBottom:40 }}>
           {items.map((b, i) => (
-            <div key={i} style={{ background:'var(--bg)', padding:'32px 28px', transition:'background .2s', cursor:'default' }}
-              onMouseEnter={e => e.currentTarget.style.background='var(--bg2)'}
-              onMouseLeave={e => e.currentTarget.style.background='var(--bg)'}>
-              <div style={{ marginBottom:20 }}>
-                <Icon name={b.icon} size={20} color={b.color} style={{ opacity:.7 }}/>
+            <div key={i} style={{
+              display:'grid',
+              gridTemplateColumns:'44px 1fr 2.6fr',
+              gap:'0 40px',
+              padding:'36px 0',
+              borderBottom: i < items.length - 1 ? '1px solid var(--border)' : 'none',
+              alignItems:'start',
+              transition:'background .2s',
+            }}
+              onMouseEnter={e => e.currentTarget.style.background='rgba(255,255,255,0.015)'}
+              onMouseLeave={e => e.currentTarget.style.background='transparent'}
+            >
+              {/* Index */}
+              <div style={{ fontFamily:'IBM Plex Mono', fontSize:10, color:'var(--muted)', letterSpacing:'.1em', paddingTop:6 }}>{b.n}</div>
+              {/* Stat + sub */}
+              <div>
+                <div style={{ fontFamily:'DM Serif Display', fontSize:42, color:'var(--text)', lineHeight:1, marginBottom:8 }}>{b.stat}</div>
+                <div style={{ fontFamily:'IBM Plex Mono', fontSize:9, color:'var(--muted)', textTransform:'uppercase', letterSpacing:'.12em' }}>{b.sub}</div>
               </div>
-              <div style={{ display:'flex', alignItems:'baseline', gap:6, marginBottom:14 }}>
-                <span style={{ fontFamily:'DM Serif Display', fontSize:32, color:b.color }}>{b.stat}</span>
-                <span style={{ fontFamily:'IBM Plex Mono', fontSize:10, color:b.color, opacity:.6, textTransform:'uppercase', letterSpacing:'.08em' }}>{b.sub}</span>
+              {/* Title + description */}
+              <div style={{ paddingTop:4 }}>
+                <h3 style={{ fontFamily:'IBM Plex Sans', fontSize:16, fontWeight:600, marginBottom:10, color:'var(--text)' }}>{b.title}</h3>
+                <p style={{ fontSize:13, color:'var(--text2)', lineHeight:1.85, maxWidth:580 }}>{b.desc}</p>
               </div>
-              <h3 style={{ fontFamily:'IBM Plex Sans', fontSize:15, fontWeight:600, marginBottom:10 }}>{b.title}</h3>
-              <p style={{ fontSize:13, color:'var(--text2)', lineHeight:1.75 }}>{b.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Institutional callout */}
-        <div className="benefit-callout" style={{ padding:'40px', borderRadius:4, background:'rgba(37,99,235,0.04)', border:'1px solid rgba(79,142,247,0.15)', display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:40, flexWrap:'wrap' }}>
-          <div style={{ maxWidth:600 }}>
-            <div style={{ fontFamily:'IBM Plex Mono', fontSize:10, color:'var(--blue3)', letterSpacing:'.12em', textTransform:'uppercase', marginBottom:14 }}>Designed for Institutions</div>
-            <h3 style={{ fontFamily:'DM Serif Display', fontSize:28, marginBottom:12 }}>Built for Tier-1 Bank Infrastructure</h3>
-            <p style={{ color:'var(--text2)', fontSize:14, lineHeight:1.8 }}>
+        <div className="benefit-callout" style={{
+          padding:'40px 48px',
+          borderRadius:2,
+          background:'rgba(255,255,255,0.02)',
+          borderTop:'2px solid rgba(255,255,255,0.07)',
+          borderLeft:'none', borderRight:'none', borderBottom:'none',
+          display:'flex', alignItems:'center', justifyContent:'space-between', gap:48, flexWrap:'wrap'
+        }}>
+          <div style={{ maxWidth:620 }}>
+            <div style={{ fontFamily:'IBM Plex Mono', fontSize:10, color:'var(--muted)', letterSpacing:'.12em', textTransform:'uppercase', marginBottom:16 }}>Designed for Institutions</div>
+            <h3 style={{ fontFamily:'DM Serif Display', fontSize:26, marginBottom:14, color:'var(--text)' }}>Built for Tier-1 Bank Infrastructure</h3>
+            <p style={{ color:'var(--text2)', fontSize:14, lineHeight:1.85 }}>
               Smart-Swap is built to institutional standards — ISDA-compatible, MiFID II-aware, and structured for favourable Basel III capital treatment of collateral yield. Every design decision is made for the trading desk and the compliance team, not for a sandbox.
             </p>
           </div>
-          <button className="btn btn-primary" style={{ fontSize:14, padding:'14px 32px', flexShrink:0, alignSelf:'center' }}>Request a Briefing</button>
+          <button className="btn btn-primary" style={{ fontSize:13, padding:'14px 32px', flexShrink:0 }}>Request a Briefing</button>
         </div>
+
       </div>
     </section>
   );
