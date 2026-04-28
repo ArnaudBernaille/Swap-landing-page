@@ -46,4 +46,7 @@ Règlement Atomique
 Interopérabilité : Mentionne que le swap peut être connecté à d'autres réseaux du Canton Network (Cash, Titres, Collatéral) pour une fluidité totale.
 La gestion du colateral peut se faire ainsi. 
 Connection via Zenith pour faire ETH -> Canton.
-Smart contract code en solidty.
+
+Constrained Collateral : le collat profite de l ecosysteme Canton pour etre investi dans des protocoles money-market et obligataires tokenises. Ajoute dans la section Technical Architecture.
+
+Kill switch : supprime cette partie. Explique que grace a la blockchain canton les fonds ne peuvent pas etre bloque en cas de bug car si les deux partie sont ok le contrat peut etre update
